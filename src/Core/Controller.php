@@ -16,7 +16,12 @@ class Controller
     {
         extract($this->vars);
         ob_start();
-        require(ROOT . "Views/" . ucfirst(str_replace('Controller', '', get_class($this))) . '/' . $filename . '.php');
+        $viewPath = str_replace('Controller', '', get_class($this));
+        $viewPath = str_replace('MVC\s', '', $viewPath);
+        $viewPath = str_replace("\\", '', $viewPath);
+        $viewPath = ROOT . '/Views/' . $viewPath . '/' . $filename . '.php';
+        require($viewPath);
+
         $content_for_layout = ob_get_clean();
 
         if ($this->layout == false) {
