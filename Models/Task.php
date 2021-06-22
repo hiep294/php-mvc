@@ -54,4 +54,3 @@ class Task extends Model
         return $req->execute([$id]);
     }
 }
-?>
