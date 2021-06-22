@@ -3,14 +3,18 @@
 class Dispatcher
 {
 
+    /**
+     *
+     * @var Request
+     */
     private $request;
 
     public function dispatch()
     {
         $this->request = new Request();
-        
+
         Router::parse($this->request->url, $this->request);
-        
+
         $controller = $this->loadController();
 
         call_user_func_array([$controller, $this->request->action], $this->request->params);
@@ -24,6 +28,4 @@ class Dispatcher
         $controller = new $name();
         return $controller;
     }
-
 }
-?>
