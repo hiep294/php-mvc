@@ -1,6 +1,7 @@
 <?php
-    class Model
-    {
 
-    }
-?>
+namespace MVC\Core;
+
+class Model
+{
+}

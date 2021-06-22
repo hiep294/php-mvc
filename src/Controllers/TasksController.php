@@ -1,4 +1,11 @@
 <?php
+
+namespace MVC\Controllers;
+
+use MVC\Core\Controller;
+use MVC\Models\Task;
+
+
 class TasksController extends Controller
 {
     function index()
@@ -14,14 +21,12 @@ class TasksController extends Controller
 
     function create()
     {
-        if (isset($_POST["title"]))
-        {
+        if (isset($_POST["title"])) {
             require(ROOT . 'Models/Task.php');
 
-            $task= new Task();
+            $task = new Task();
 
-            if ($task->create($_POST["title"], $_POST["description"]))
-            {
+            if ($task->create($_POST["title"], $_POST["description"])) {
                 header("Location: " . WEBROOT . "tasks/index");
             }
         }
@@ -32,14 +37,12 @@ class TasksController extends Controller
     function edit($id)
     {
         require(ROOT . 'Models/Task.php');
-        $task= new Task();
+        $task = new Task();
 
         $d["task"] = $task->showTask($id);
 
-        if (isset($_POST["title"]))
-        {
-            if ($task->edit($id, $_POST["title"], $_POST["description"]))
-            {
+        if (isset($_POST["title"])) {
+            if ($task->edit($id, $_POST["title"], $_POST["description"])) {
                 header("Location: " . WEBROOT . "tasks/index");
             }
         }
@@ -52,8 +55,7 @@ class TasksController extends Controller
         require(ROOT . 'Models/Task.php');
 
         $task = new Task();
-        if ($task->delete($id))
-        {
+        if ($task->delete($id)) {
             header("Location: " . WEBROOT . "tasks/index");
         }
     }

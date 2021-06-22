@@ -1,5 +1,9 @@
 <?php
 
+namespace MVC;
+
+use MVC\Request;
+
 class Dispatcher
 {
 

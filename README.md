@@ -1,7 +1,7 @@
 # Installation
 
-- config folder named `mvc`
+- config folder named `MVC`
 
-- create database `mvc` in mysql
+- create database `MVC` in mysql
 
-- import file mvc.sql to database `mvc`
+- import file mvc.sql to database `MVC`
