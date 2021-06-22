@@ -1,5 +1,5 @@
 <?php
-class tasksController extends Controller
+class TasksController extends Controller
 {
     function index()
     {
@@ -58,4 +58,3 @@ class tasksController extends Controller
         }
     }
 }
-?>
