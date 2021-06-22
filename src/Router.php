@@ -14,13 +14,13 @@ class Router
     {
         $url = trim($url);
 
-        if ($url == "/mvc/") {
-            // homepage, 'mvc' is folder name of this project
+        if ($url == "/MVC/") {
+            // homepage, 'MVC' is folder name of this project
             $request->controller = "tasks";
             $request->action = "index";
             $request->params = [];
         } else {
-            // example url: /mvc/tasks/create/
+            // example url: /MVC/tasks/create/
             $explode_url = explode('/', $url);
             $explode_url = array_slice($explode_url, 2);
             $request->controller = $explode_url[0];
