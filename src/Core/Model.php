@@ -8,4 +8,8 @@ class Model
     {
         return get_object_vars($this);
     }
+    public function getMyClass()
+    {
+        return get_class($this);
+    }
 }
