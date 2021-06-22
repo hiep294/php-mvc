@@ -37,11 +37,16 @@ class ResourceModel implements ResourceModelInterface
 
     public function get(int $id)
     {
+        $sql = "SELECT * FROM {$this->table} where id = :id LIMIT 1";
+        $req = Database::getBdd()->prepare($sql);
+        $req->execute(array('id' => $id));
+        $rs = $req->fetchAll(PDO::FETCH_OBJ);
+        return $rs[0];
     }
 
     public function getAll()
     {
-        $properties = implode(',', array_keys($this->model->getProperties()));
+        $properties = $this->model->getPropertiesString();
         $sql = "SELECT {$properties} FROM {$this->table}";
         $req = Database::getBdd()->prepare($sql);
         $req->execute();

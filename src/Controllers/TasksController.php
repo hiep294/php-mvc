@@ -41,21 +41,20 @@ class TasksController extends Controller
         $this->render("create");
     }
 
-    // function edit($id)
-    // {
-    //     require(ROOT . 'Models/Task.php');
-    //     $task = new Task();
+    function edit($id)
+    {
 
-    //     $d["task"] = $task->showTask($id);
+        $d["task"] = $this->taskRepo->get($id);
 
-    //     if (isset($_POST["title"])) {
-    //         if ($task->edit($id, $_POST["title"], $_POST["description"])) {
-    //             header("Location: " . WEBROOT . "tasks/index");
-    //         }
-    //     }
-    //     $this->set($d);
-    //     $this->render("edit");
-    // }
+        if (isset($_POST["title"])) {
+            $task = new TaskModel($_POST["title"], $_POST["description"], $id);
+            if ($this->taskRepo->update($task)) {
+                header("Location: " . WEBROOT . "tasks/index");
+            }
+        }
+        $this->set($d);
+        $this->render("edit");
+    }
 
     // function delete($id)
     // {

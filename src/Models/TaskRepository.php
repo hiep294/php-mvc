@@ -24,4 +24,14 @@ class TaskRepository
     {
         return $this->taskResource->save($task);
     }
+
+    public function update(TaskModel $task)
+    {
+        return $this->taskResource->save($task);
+    }
+
+    public function get($id)
+    {
+        return $this->taskResource->get($id);
+    }
 }
