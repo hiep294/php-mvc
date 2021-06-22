@@ -146,12 +146,12 @@
         <subPane>
           <expand>
             <path>
-              <item name="MVC_todo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MVC_todo" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="mvc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mvc" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
-              <item name="MVC_todo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MVC_todo" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="mvc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mvc" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Webroot" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
