@@ -41,17 +41,11 @@ class ResourceModel implements ResourceModelInterface
 
     public function getAll()
     {
-        $myClass = $this->model->getMyClass();
-        $dd = new $myClass();
-        echo json_encode(get_object_vars($dd));
-        echo "<br>";
-
-        $sql = "SELECT * FROM {$this->table}";
+        $properties = implode(',', array_keys($this->model->getProperties()));
+        $sql = "SELECT {$properties} FROM {$this->table}";
         $req = Database::getBdd()->prepare($sql);
         $req->execute();
-        $rs = $req->fetchAll(PDO::FETCH_CLASS, $myClass);
-        echo "rs " . json_encode($rs);
-
+        $rs = $req->fetchAll(PDO::FETCH_OBJ);
         return $rs;
     }
 

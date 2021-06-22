@@ -22,15 +22,7 @@ class TasksController extends Controller
 
     function index()
     {
-        // $sql = "SELECT * FROM tasks";
-        // $req = Database::getBdd()->prepare($sql);
-
-        // $tasks =  $req->fetchAll(PDO::FETCH_CLASS, 'TaskModel');
-
-        // echo $tasks[0]->title;
-        $this->taskRepo->getAll();
-        $tasks = []; // ;
-
+        $tasks = $this->taskRepo->getAll();
         $d['tasks'] = $tasks;
         $this->set($d);
         $this->render("index");
