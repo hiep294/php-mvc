@@ -6,7 +6,10 @@ use PDO;
 
 class Database
 {
-    private static ?PDO $bdd = null;
+    /**
+     * @var null|PDO
+     */
+    private static $bdd = null;
 
     private function __construct()
     {

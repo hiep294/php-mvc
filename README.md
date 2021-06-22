@@ -1,11 +1,7 @@
 # Installation
 
-- config folder named `MVC`
+- change folder named `MVC`
 
-- create database `MVC` in mysql
+- create database, and config db in src/Config/Database.php
 
-- import file mvc.sql to database `MVC`
-
-# source
-
-- https://www.php.net/manual/en/language.oop5.properties.php
+- import file mvc.sql to database
