@@ -56,13 +56,10 @@ class TasksController extends Controller
         $this->render("edit");
     }
 
-    // function delete($id)
-    // {
-    //     require(ROOT . 'Models/Task.php');
-
-    //     $task = new Task();
-    //     if ($task->delete($id)) {
-    //         header("Location: " . WEBROOT . "tasks/index");
-    //     }
-    // }
+    function delete($id)
+    {
+        if ($this->taskRepo->delete($id)) {
+            header("Location: " . WEBROOT . "tasks/index");
+        }
+    }
 }

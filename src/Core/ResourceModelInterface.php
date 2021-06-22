@@ -10,5 +10,5 @@ interface ResourceModelInterface
 
     public function save(Model $model);
 
-    public function delete(Model $model);
+    public function delete(int $id);
 }

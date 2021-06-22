@@ -99,7 +99,11 @@ class ResourceModel implements ResourceModelInterface
         return $req->execute(array_merge($properties, $date));
     }
 
-    public function delete(Model $model)
+    public function delete(int $id)
     {
+        $sql = "DELETE FROM {$this->table} WHERE id = :id";
+        $req = Database::getBdd()->prepare($sql);
+
+        return $req->execute(array(':id' => $id));
     }
 }

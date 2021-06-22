@@ -34,4 +34,9 @@ class TaskRepository
     {
         return $this->taskResource->get($id);
     }
+
+    public function delete($id)
+    {
+        return $this->taskResource->delete($id);
+    }
 }
