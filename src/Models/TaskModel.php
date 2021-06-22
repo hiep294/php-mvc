@@ -6,9 +6,20 @@ use MVC\Core\Model;
 
 class TaskModel extends Model
 {
-    protected ?int $id;
-    protected string $title;
-    protected string $description;
+    /**
+     * @var null|int
+     */
+    public $id;
+
+    /**
+     * @var string
+     */
+    public $title;
+
+    /**
+     * @var string
+     */
+    public $description;
 
 
     public function set(string $name, $value)

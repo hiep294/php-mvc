@@ -10,6 +10,9 @@ use PDO;
 
 class TasksController extends Controller
 {
+    /**
+     * @var TaskRepository
+     */
     private $taskRepo;
 
     public function __construct()
@@ -25,7 +28,8 @@ class TasksController extends Controller
         // $tasks =  $req->fetchAll(PDO::FETCH_CLASS, 'TaskModel');
 
         // echo $tasks[0]->title;
-        $tasks = $this->taskRepo->getAll() || [];
+        $this->taskRepo->getAll();
+        $tasks = []; // ;
 
         $d['tasks'] = $tasks;
         $this->set($d);
