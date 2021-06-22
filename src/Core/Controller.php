@@ -12,6 +12,12 @@ class Controller
         $this->vars = array_merge($this->vars, $d);
     }
 
+    /**
+     * example: TasksController call this method with filename "index" => will render to file Views/Tasks/index
+     *
+     * @param string $filename
+     * @return void
+     */
     function render($filename)
     {
         extract($this->vars);

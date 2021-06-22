@@ -3,6 +3,7 @@
 namespace MVC\Models;
 
 use MVC\Models\TaskResourceModel;
+use MVC\Models\TaskModel;
 
 class TaskRepository
 {
@@ -16,5 +17,11 @@ class TaskRepository
     public function getAll()
     {
         return $this->taskResource->getAll();
+    }
+
+
+    public function add(TaskModel $task)
+    {
+        return $this->taskResource->save($task);
     }
 }

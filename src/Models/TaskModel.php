@@ -22,6 +22,13 @@ class TaskModel extends Model
     public $description;
 
 
+    public function __construct(string $title = "", string $description = "", string $id = null)
+    {
+        $this->title = $title;
+        $this->description = $description;
+        $this->id = $id;
+    }
+
     public function set(string $name, $value)
     {
         $this->{$name} = $value;

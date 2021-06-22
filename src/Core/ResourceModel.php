@@ -51,6 +51,47 @@ class ResourceModel implements ResourceModelInterface
 
     public function save(Model $model)
     {
+        $properties = $model->getProperties();
+
+        if ($model->id === null) {
+            /**
+             * CREATE
+             */
+            unset($properties['id']);
+
+            $placeNames = [];
+            foreach ($properties as $key => $value) {
+                array_push($placeNames, ':' . $key);
+            }
+
+            $columnsString = implode(',', array_keys($properties));
+            $placeNamesString = implode(',', $placeNames);
+
+            $sql = "INSERT INTO {$this->table} ({$columnsString}, created_at, updated_at) VALUES ({$placeNamesString}, :created_at, :updated_at)";
+            $req = Database::getBdd()->prepare($sql);
+            $date = array("created_at" => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s'));
+
+            return $req->execute(array_merge($properties, $date));
+        }
+
+        /**
+         * UPDATE
+         */
+        $columns = [];
+
+        foreach (array_keys($properties) as $k => $v) {
+            if ($v !== 'id') {
+                array_push($columns, $v . ' = :' . $v);
+            }
+        }
+
+        $columns = implode(',', $columns);
+
+        $sql = "UPDATE {$this->table} SET " . $columns . ', updated_at = :updated_at WHERE id = :id';
+        $req = Database::getBdd()->prepare($sql);
+        $date = array("id" => $model->id, 'updated_at' => date('Y-m-d H:i:s'));
+
+        return $req->execute(array_merge($properties, $date));
     }
 
     public function delete(Model $model)
