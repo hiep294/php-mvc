@@ -3,6 +3,7 @@
 namespace MVC;
 
 use MVC\Request;
+use MVC\Router;
 
 class Dispatcher
 {
