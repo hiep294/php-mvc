@@ -21,12 +21,28 @@ class TaskModel extends Model
      */
     public $description;
 
+    /**
+     * @var string
+     */
+    public $created_at;
 
-    public function __construct(string $title = "", string $description = "", string $id = null)
+    /**
+     * @var string
+     */
+    public $updated_at;
+
+
+    public static function createInstance(string $title = "", string $description = "", string $id = null)
     {
-        $this->title = $title;
-        $this->description = $description;
-        $this->id = $id;
+        $task = new TaskModel();
+        $task->title = $title;
+        $task->description = $description;
+        $task->id = $id;
+        return $task;
+    }
+
+    public function __construct()
+    {
     }
 
     public function set(string $name, $value)

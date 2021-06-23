@@ -5,7 +5,6 @@ namespace MVC\Core;
 use MVC\Config\Database;
 use MVC\Core\Model;
 use MVC\Core\ResourceModelInterface;
-use MVC\Models\TaskModel;
 use PDO;
 
 // use PDO;
@@ -18,7 +17,7 @@ class ResourceModel implements ResourceModelInterface
     private $table;
 
     /**
-     * @var null|int
+     * @var null|string
      */
     private $id;
 
@@ -28,7 +27,7 @@ class ResourceModel implements ResourceModelInterface
     private Model $model;
 
 
-    public function _init(string $table, ?int $id, Model $model)
+    public function _init(string $table, ?string $id, Model $model)
     {
         $this->table = $table;
         $this->id = $id;
@@ -37,26 +36,41 @@ class ResourceModel implements ResourceModelInterface
 
     public function get(int $id)
     {
-        $sql = "SELECT * FROM {$this->table} where id = :id LIMIT 1";
+        // $sql = "SELECT * FROM {$this->table} where id = :id LIMIT 1";
+        // $req = Database::getBdd()->prepare($sql);
+        // $req->execute(array('id' => $id));
+        // $rs = $req->fetchAll(PDO::FETCH_OBJ);
+        // return $rs[0];
+
+        // this solution require Model has no __constructor
+        $sql = "SELECT * FROM {$this->table} where id = $id";
         $req = Database::getBdd()->prepare($sql);
-        $req->execute(array('id' => $id));
-        $rs = $req->fetchAll(PDO::FETCH_OBJ);
-        return $rs[0];
+        $req->execute();
+        $rs = $req->fetchObject($this->model->getMyClass());
+        return $rs;
     }
 
     public function getAll()
     {
-        $properties = $this->model->getPropertiesString();
-        $sql = "SELECT {$properties} FROM {$this->table}";
+        // $properties = $this->model->getPropertiesString();
+        // $sql = "SELECT {$properties} FROM {$this->table}";
+        // $req = Database::getBdd()->prepare($sql);
+        // $req->execute();
+        // $rs = $req->fetchAll(PDO::FETCH_OBJ);
+        // return $rs;
+
+        // this solution require Model has no __constructor
+        $myClass = $this->model->getMyClass();
+        $sql = "SELECT * FROM {$this->table}";
         $req = Database::getBdd()->prepare($sql);
         $req->execute();
-        $rs = $req->fetchAll(PDO::FETCH_OBJ);
+        $rs = $req->fetchAll(PDO::FETCH_CLASS, $myClass);
         return $rs;
     }
 
     public function save(Model $model)
     {
-        $properties = $model->getProperties();
+        $properties = $model->getPropertiesNoTimeStamp();
 
         if ($model->id === null) {
             /**
