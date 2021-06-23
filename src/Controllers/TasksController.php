@@ -32,7 +32,7 @@ class TasksController extends Controller
     {
         // if submit
         if (isset($_POST["title"])) {
-            $task = new TaskModel($_POST["title"], $_POST["description"]);
+            $task = TaskModel::createInstance($_POST["title"], $_POST["description"]);
             if ($this->taskRepo->add($task)) {
                 header("Location: " . WEBROOT . "tasks/index");
             }
@@ -47,7 +47,7 @@ class TasksController extends Controller
         $d["task"] = $this->taskRepo->get($id);
 
         if (isset($_POST["title"])) {
-            $task = new TaskModel($_POST["title"], $_POST["description"], $id);
+            $task = TaskModel::createInstance($_POST["title"], $_POST["description"], $id);
             if ($this->taskRepo->update($task)) {
                 header("Location: " . WEBROOT . "tasks/index");
             }
