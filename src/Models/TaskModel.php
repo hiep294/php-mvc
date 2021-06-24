@@ -8,6 +8,7 @@ class TaskModel extends Model
 {
     /**
      * @var null|int
+     * this must be public, if use PDO::FETCH_CLASS
      */
     public $id;
 
@@ -39,19 +40,5 @@ class TaskModel extends Model
         $task->description = $description;
         $task->id = $id;
         return $task;
-    }
-
-    public function __construct()
-    {
-    }
-
-    public function set(string $name, $value)
-    {
-        $this->{$name} = $value;
-    }
-
-    public function get(string $name)
-    {
-        return $this->{$name};
     }
 }

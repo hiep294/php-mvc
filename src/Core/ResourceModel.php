@@ -14,17 +14,18 @@ class ResourceModel implements ResourceModelInterface
     /**
      * @var string
      */
-    private $table;
+    protected $table;
 
     /**
+     * $id: is primary key in database
      * @var null|string
      */
-    private $id;
+    protected $id;
 
     /**
      * @var Model
      */
-    private Model $model;
+    protected Model $model;
 
 
     public function _init(string $table, ?string $id, Model $model)
@@ -36,14 +37,8 @@ class ResourceModel implements ResourceModelInterface
 
     public function get(int $id)
     {
-        // $sql = "SELECT * FROM {$this->table} where id = :id LIMIT 1";
-        // $req = Database::getBdd()->prepare($sql);
-        // $req->execute(array('id' => $id));
-        // $rs = $req->fetchAll(PDO::FETCH_OBJ);
-        // return $rs[0];
-
         // this solution require Model has no __constructor
-        $sql = "SELECT * FROM {$this->table} where id = $id";
+        $sql = "SELECT * FROM {$this->table} where {$this->id} = $id";
         $req = Database::getBdd()->prepare($sql);
         $req->execute();
         $rs = $req->fetchObject($this->model->getMyClass());
@@ -52,13 +47,6 @@ class ResourceModel implements ResourceModelInterface
 
     public function getAll()
     {
-        // $properties = $this->model->getPropertiesString();
-        // $sql = "SELECT {$properties} FROM {$this->table}";
-        // $req = Database::getBdd()->prepare($sql);
-        // $req->execute();
-        // $rs = $req->fetchAll(PDO::FETCH_OBJ);
-        // return $rs;
-
         // this solution require Model has no __constructor
         $myClass = $this->model->getMyClass();
         $sql = "SELECT * FROM {$this->table}";
@@ -72,11 +60,11 @@ class ResourceModel implements ResourceModelInterface
     {
         $properties = $model->getPropertiesNoTimeStamp();
 
-        if ($model->id === null) {
+        if ($model->get($this->id) === null) {
             /**
              * CREATE
              */
-            unset($properties['id']);
+            unset($properties[$this->id]);
 
             $placeNames = [];
             foreach ($properties as $key => $value) {
@@ -99,23 +87,23 @@ class ResourceModel implements ResourceModelInterface
         $columns = [];
 
         foreach (array_keys($properties) as $k => $v) {
-            if ($v !== 'id') {
+            if ($v !== $this->id) {
                 array_push($columns, $v . ' = :' . $v);
             }
         }
 
-        $columns = implode(',', $columns);
+        $columnsQuery = implode(',', $columns);
 
-        $sql = "UPDATE {$this->table} SET " . $columns . ', updated_at = :updated_at WHERE id = :id';
+        $sql = "UPDATE {$this->table} SET " . $columnsQuery . ", updated_at = :updated_at WHERE {$this->id} = :id";
         $req = Database::getBdd()->prepare($sql);
-        $date = array("id" => $model->id, 'updated_at' => date('Y-m-d H:i:s'));
+        $date = array("id" => $model->get($this->id), 'updated_at' => date('Y-m-d H:i:s'));
 
         return $req->execute(array_merge($properties, $date));
     }
 
     public function delete(int $id)
     {
-        $sql = "DELETE FROM {$this->table} WHERE id = :id";
+        $sql = "DELETE FROM {$this->table} WHERE {$this->id} = :id";
         $req = Database::getBdd()->prepare($sql);
 
         return $req->execute(array(':id' => $id));
