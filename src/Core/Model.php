@@ -27,13 +27,29 @@ class Model
         return get_class($this);
     }
 
+    /**
+     * @param array $array
+     */
+    public function setData($array)
+    {
+        foreach ($array as $key => $value) {
+            $this->set($key, $value);
+        }
+    }
+
     public function set(string $name, $value)
     {
-        $this->{$name} = $value;
+        if (property_exists($this, $name)) {
+            $this->{$name} = $value;
+        }
     }
 
     public function get(string $name)
     {
-        return $this->{$name};
+        if (property_exists($this, $name)) {
+            return $this->{$name};
+        } else {
+            return "";
+        }
     }
 }

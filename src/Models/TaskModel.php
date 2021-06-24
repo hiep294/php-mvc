@@ -31,14 +31,4 @@ class TaskModel extends Model
      * @var string
      */
     public $updated_at;
-
-
-    public static function createInstance(string $title = "", string $description = "", string $id = null)
-    {
-        $task = new TaskModel();
-        $task->title = $title;
-        $task->description = $description;
-        $task->id = $id;
-        return $task;
-    }
 }
