@@ -5,3 +5,7 @@
 - create database, and config db in src/Config/Database.php
 
 - import file mvc.sql to database
+
+# New table: Todo
+
+- create table
