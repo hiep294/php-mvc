@@ -10,25 +10,25 @@ class TaskModel extends Model
      * @var null|int
      * this must be public, if use PDO::FETCH_CLASS
      */
-    public $id;
+    protected $id;
 
     /**
      * @var string
      */
-    public $title;
+    protected $title;
 
     /**
      * @var string
      */
-    public $description;
+    protected $description;
 
     /**
      * @var string
      */
-    public $created_at;
+    protected $created_at;
 
     /**
      * @var string
      */
-    public $updated_at;
+    protected $updated_at;
 }

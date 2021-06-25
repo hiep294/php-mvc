@@ -13,10 +13,10 @@
         <?php
         foreach ($tasks as $task) {
             echo '<tr>';
-            echo "<td>" . $task->id . "</td>";
-            echo "<td>" . $task->title . "</td>";
-            echo "<td>" . $task->description . "</td>";
-            echo "<td class='text-center'><a class='btn btn-info btn-xs' href='/MVC/tasks/edit/" . $task->id . "' ><span class='glyphicon glyphicon-edit'></span> Edit</a> <a href='/MVC/tasks/delete/" . $task->id . "' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove'></span> Del</a></td>";
+            echo "<td>" . $task->get("id") . "</td>";
+            echo "<td>" . $task->get("title") . "</td>";
+            echo "<td>" . $task->get("description") . "</td>";
+            echo "<td class='text-center'><a class='btn btn-info btn-xs' href='/MVC/tasks/edit/" . $task->get("id") . "' ><span class='glyphicon glyphicon-edit'></span> Edit</a> <a href='/MVC/tasks/delete/" . $task->get("id") . "' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove'></span> Del</a></td>";
             echo "</tr>";
         }
         ?>
