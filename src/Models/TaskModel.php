@@ -8,7 +8,6 @@ class TaskModel extends Model
 {
     /**
      * @var null|int
-     * this must be public, if use PDO::FETCH_CLASS
      */
     protected $id;
 
